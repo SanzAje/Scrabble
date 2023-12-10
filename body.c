@@ -94,6 +94,7 @@ void printScrabbleBoard() {
 void inputPlayerName() {
 	system("cls");
 	header();
+	displayScoresFromFile();
 	printf("\n\n\t\t\t\t                    ||===============================================================||\n");
 	printf("\n\t\t\t\t\t\t    ||      Masukan Nama Player\t     :\t\t\t\t     ||\n\n");
     printf("\t\t\t\t\t\t           Player 1\t\t:\t\t\t\t");
@@ -535,7 +536,7 @@ bool isTripleLetter(int row, int col) {
 void checkWin() {
 	Player arrPlayer[2] = {player1, player2};
 	if(player1.score < player2.score) {
-		printf("\t\t\t\t\t\t\t\t\t\t\t       %s Menang!\n", &player2.name);
+		printf("\t\t\t\t\t\t\t\t\t\t       %s Menang!\n", &player2.name);
 	} else {
 		printf("\t\t\t\t\t\t\t\t\t\t\t       %s Menang!\n", &player1.name);
 	}
@@ -587,11 +588,6 @@ void saveScoreToFile(Player arrPlayer[2]) {
 
         // Menulis kembali skor ke dalam file
         fseek(frec, 0, SEEK_SET);
-        fprintf(frec, "Data Score Player Scrabble\n");
-
-//        for (i = 0; i < numScores; i++) {
-//            fprintf(frec, "Nama: %s\nScore: %d\n", scores[i].name, scores[i].score);
-//        }
         
         for(i = 0; i < numScores; i++) {
         	fprintf(frec, "Nama: %s\nScore: %d\n", &scores[i].name, scores[i].score);
@@ -705,6 +701,47 @@ void placeStartingWord(Tile board[BOARD_SIZE][BOARD_SIZE]) {
     for (i = 0; i < strlen(word); i++) {
         board[center][start + i].letter = word[i];
     }
+}
+
+//Menampilkan data highscore dari file dengan order descending
+void displayScoresFromFile() {
+    FILE *file = fopen("HighscoreScrabble.txt", "r");
+    int i, j;
+    
+    if (file == NULL) {
+        printf("\t\t\t\t\t\t\t       Gagal membuka file.\n");
+        return;
+    }
+
+    Player scores[100]; // Anggap saja maksimal 100 skor
+    int numScores = 0;
+
+    // Membaca skor dari file
+    while (fscanf(file, "Nama: %s\nScore: %d\n", &scores[numScores].name, &scores[numScores].score) == 2) {
+        numScores++;
+    }
+
+    // Mengurutkan skor dalam urutan menurun (descending)
+    for (i = 0; i < numScores - 1; i++) {
+        for (j = i + 1; j < numScores; j++) {
+            if (scores[i].score < scores[j].score) {
+                Player temp = scores[i];
+                scores[i] = scores[j];
+                scores[j] = temp;
+            }
+        }
+    }
+
+    // Menampilkan skor ke CLI
+    printf("\t\t\t\t\t\t\t\t\t       ________________\n");
+    printf("\t\t\t\t\t\t\t\t\t       | Nama  | Score |\n");
+    printf("\t\t\t\t\t\t\t\t\t       ________________\n");
+    for (i = 0; i < numScores; i++) {
+        printf("\t\t\t\t\t\t\t\t\t       | %-5s | %-5d |\n", &scores[i].name, scores[i].score);
+    }
+    printf("\t\t\t\t\t\t\t\t\t       ________________\n");
+
+    fclose(file);
 }
 
 

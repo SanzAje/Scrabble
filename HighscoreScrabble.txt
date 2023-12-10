@@ -1,5 +1,4 @@
-Data Score Player Scrabble
-Nama: ian
-Score: 10
 Nama: ikis
-Score: 7
+Score: 16
+Nama: ian
+Score: 9

@@ -65,4 +65,5 @@ void endGame();
 void clueSpecialTiles();
 void getRandomWord(char *word);
 void placeStartingWord(Tile board[BOARD_SIZE][BOARD_SIZE]);
+void displayScoresFromFile();
 
