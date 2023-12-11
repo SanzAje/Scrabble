@@ -45,7 +45,7 @@ void chooseNumberOfPlayers();
 void invalidChoose();
 void confirmExit(int *i);
 void alertExit();
-void twoPlayers();
+void twoPlayers(int whoseTurn);
 void fourPlayers();
 void startGame();
 void placeWord(Tile board[BOARD_SIZE][BOARD_SIZE], int x, int y, char *word, char *lines);
