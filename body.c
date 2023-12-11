@@ -606,7 +606,7 @@ void endGame() {
 //	system("cls");
 	header();
 	printf("\n\n\t\t\t                    ||===============================================================||\n");
-	printf("\n\t\t\t                    ||\t\t      Game     Selesai   \t    : \t\t             ||\n");
+	printf("\n\t\t\t                    ||\t\t      Game     Selesai   \t    : \t             ||\n");
 	printf("\t\t\t                    ||\t            1. \t\t          Kembali \t\t     ||\n");
 	printf("\t\t\t                    ||===============================================================||\n");
     printf("\t\t\t\t\t\t         Pilihan Kamu\t\t    :\t\t\t");

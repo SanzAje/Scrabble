@@ -2,3 +2,5 @@ Nama: ikis
 Score: 16
 Nama: ian
 Score: 9
+Nama: hanif
+Score: 13
